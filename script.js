@@ -79,11 +79,8 @@ What is an event?  Why "change" instead of "click"?
 Show students: the page reacts when the user does something */
 
  selector.addEventListener("change", function () {
-   console.log("Dropdown changed!");
- });
 
- 
-/*  STEP 3: Getting the Selected Mood
+   /*  STEP 3: Getting the Selected Mood
  console.log(selector.value) to show the mood
  Explain: playlistData[mood] vs playlistData.focus
  This is dynamic property access! */
@@ -117,6 +114,9 @@ Show students: the page reacts when the user does something */
 
  
 
+ });
+
+ 
 
 //  BONUS: Image Fallback Protection
  img.onerror = function() {
