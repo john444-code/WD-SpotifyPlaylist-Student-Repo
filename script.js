@@ -73,52 +73,63 @@ const container = document.getElementById("playlist-container");
 
 const feedback = document.getElementById("feedback");
 
-
 /* STEP 2: Basic Event Listener Setup
 What is an event?  Why "change" instead of "click"?
 Show students: the page reacts when the user does something */
 
- selector.addEventListener("change", function () {
-
-   /*  STEP 3: Getting the Selected Mood
+selector.addEventListener("change", function () {
+  /*  STEP 3: Getting the Selected Mood
  console.log(selector.value) to show the mood
  Explain: playlistData[mood] vs playlistData.focus
  This is dynamic property access! */
 
- const mood = selector.value;
- console.log("Selected mood:", mood);
+  const mood = selector.value;
+  console.log("Selected mood:", mood);
 
- 
-/*  STEP 4: Dynamic Data Access (⭐ KEY CONCEPT!)
+  /*  STEP 4: Dynamic Data Access (⭐ KEY CONCEPT!)
 💡 Emphasize: playlistData[mood] NOT playlistData.focus */
 
- const songs = playlistData[mood];
- console.log("Songs for this mood:", songs);
+  const songs = playlistData[mood];
+  console.log("Songs for this mood:", songs);
 
+  //WE DO STEP ==> Instructor and students will complete steps 5-6 live together.
 
+  // STEP 5: Clearing Previous Playlist
+  container.innerHTML = ""; // Clear previous playlist items
+  // STEP 6: Conditional Feedback
+  if (mood === "focus") {
+    feedback.innerText = "Lock in";
+  } else if (mood === "chill") {
+    feedback.innerText = "Time to relax!";
+  } else if (mood === "hype") {
+    feedback.innerText = "Let's goooo!";
+  } else {
+    feedback.innerText = "Please select a mood.";
+  }
 
-//WE DO STEP ==> Instructor and students will complete steps 5-6 live together.
+  // STOP. DEV TEAMS BEGIN HERE.
 
-// STEP 5: Clearing Previous Playlist
+  // STEP 7: The Loop (⭐⭐⭐ MOST IMPORTANT!)
+  if (songs) {
+    for (let i = 0; i < songs.length; i++) {
+      const song = songs[i];
+      const row = document.createElement("div");
+      row.className = "playlist-row";
 
-// STEP 6: Conditional Feedback
-
-
-// STOP. DEV TEAMS BEGIN HERE.
-
-// STEP 7: The Loop (⭐⭐⭐ MOST IMPORTANT!)
-
-
-// STEP 8: Create and Display DOM Elements
-
-
- 
-
- });
-
- 
+      const img = document.createElement("img");
+      img.src = song.cover;
+      img.onerror = function () {
+        this.src = "https://placehold.co/60x60?text=Music";
+      };
+      const title = document.createElement("div");
+      title.className = "playlist-title";
+      title.innerText = song.title;
+      row.appendChild(img);
+      row.appendChild(title);
+      container.appendChild(row);
+    }
+  }
+  // STEP 8: Create and Display DOM Elements
+});
 
 //  BONUS: Image Fallback Protection
- img.onerror = function() {
-    this.src = "https://placehold.co/60x60?text=Music";
-  };
